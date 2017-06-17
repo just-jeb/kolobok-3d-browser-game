@@ -7,6 +7,7 @@ describe('MainScreenComponent', () => {
   let fixture: ComponentFixture<MainScreenComponent>;
 
   beforeEach(async(() => {
+    //noinspection JSIgnoredPromiseFromCall
     TestBed.configureTestingModule({
       declarations: [ MainScreenComponent ]
     })

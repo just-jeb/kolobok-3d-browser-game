@@ -1,9 +1,10 @@
 import { TestBed, async } from '@angular/core/testing';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './kolobok.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
+    //noinspection JSIgnoredPromiseFromCall
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
