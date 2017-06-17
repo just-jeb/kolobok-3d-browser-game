@@ -4,7 +4,7 @@ import {Color4, Engine, FreeCamera, HemisphericLight, Mesh, Scene, Vector3} from
 @Component({
   selector: 'kolobok-main-screen',
   templateUrl: './main-screen.component.html',
-  styleUrls: ['./main-screen.component.css']
+  styleUrls: ['./main-screen.component.scss']
 })
 export class MainScreenComponent implements AfterViewInit{
 
@@ -30,7 +30,7 @@ export class MainScreenComponent implements AfterViewInit{
     camera.setTarget(Vector3.Zero());
 
     // This attaches the camera to the canvas
-    camera.attachControl(this.canvas, false);
+    camera.attachControl(this.canvas.nativeElement, false);
 
     // This creates a light, aiming 0,1,0 - to the sky.
     var light = new HemisphericLight("light1", new Vector3(0, 1, 0), scene);
