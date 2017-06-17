@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ViewChild} from "@angular/core";
-import {Color4, Engine, FreeCamera, HemisphericLight, Mesh, Scene, Vector3} from "../../../../node_modules/babylonjs";
+import {Color4, Engine, FreeCamera, HemisphericLight, Mesh, Scene, Vector3} from "babylonjs";
 
 @Component({
   selector: 'kolobok-main-screen',
