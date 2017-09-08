@@ -1,14 +1,16 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MainScreenComponent} from './main-screen/main-screen.component';
-import {GameBootstrapperService} from '../game-bootstrapper.service';
+import {StoreModule} from '../store/store.module';
+import {BootstrapModule} from '../bootstrap/bootstrap.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    StoreModule,
+    BootstrapModule
   ],
   declarations: [MainScreenComponent],
   exports: [MainScreenComponent],
-  providers: [GameBootstrapperService]
 })
 export class GameModule { }

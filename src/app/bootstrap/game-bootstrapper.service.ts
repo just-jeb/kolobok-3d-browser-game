@@ -1,17 +1,40 @@
 import {Injectable} from '@angular/core';
 import {Color4, Engine, FreeCamera, HemisphericLight, Mesh, Scene, Vector3} from 'babylonjs';
+import {Subject} from 'rxjs/Subject';
+import {Observable} from 'rxjs/Observable';
+import {AsyncSubject} from 'rxjs/AsyncSubject';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class GameBootstrapperService {
+  public scene: Observable<Scene>;
+  private engineSubject: Subject<Engine> = new AsyncSubject();
+  // TODO: remove
+  private canvas: HTMLCanvasElement;
 
-  constructor() { }
+  get engine(): Observable<Engine> {
+    return this.engineSubject;
+  }
+
+  constructor() {
+    this.scene = this.engineSubject.map(engine => {
+      const scene = new Scene(engine);
+      this.initScene(scene);
+      engine.runRenderLoop(function () {
+        scene.render();
+      });
+      return scene;
+    });
+  }
 
   bootstrap(canvas: HTMLCanvasElement) {
-    const engine = new Engine(canvas, true);
+    this.canvas = canvas;
+    this.engineSubject.next(new Engine(canvas, true));
+    this.engineSubject.complete();
+  }
 
-    // Now create a basic Babylon Scene object
-    const scene = new Scene(engine);
-
+  // TODO: remove
+  private initScene(scene): Scene {
     // Change the scene background color to green.
     scene.clearColor = new Color4(0, 1, 0, 0);
 
@@ -22,7 +45,7 @@ export class GameBootstrapperService {
     camera.setTarget(Vector3.Zero());
 
     // This attaches the camera to the canvas
-    camera.attachControl(canvas, false);
+    camera.attachControl(this.canvas, false);
 
     // This creates a light, aiming 0,1,0 - to the sky.
     const light = new HemisphericLight('light1', new Vector3(0, 1, 0), scene);
@@ -38,10 +61,8 @@ export class GameBootstrapperService {
 
     // Let's try our built-in 'ground' shape.  Params: name, width, depth, subdivisions, scene
     Mesh.CreateGround('ground1', 6, 6, 2, scene);
-
-    engine.runRenderLoop(function () {
-      scene.render();
-    });
+    return scene;
   }
+
 
 }
