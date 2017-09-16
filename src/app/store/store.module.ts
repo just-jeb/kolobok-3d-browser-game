@@ -8,14 +8,16 @@ import {environment} from '../../environments/environment';
 import {EffectsModule} from '@ngrx/effects';
 import {InputEffects} from './effects/input.effects';
 import {BabylonModule} from '../babylon/babylon.module';
+import {GameLoopEffects} from './effects/game-loop.effects';
+import {RenderEffects} from '../babylon/render.effects';
 
 @NgModule({
   imports: [
     CommonModule,
     BabylonModule,
     NgRxStoreModule.forRoot(reducers),
-    EffectsModule.forRoot([InputEffects]),
-    !environment.production ? StoreDevtoolsModule.instrument({maxAge: 5}) : []
+    EffectsModule.forRoot([InputEffects, GameLoopEffects, RenderEffects]),
+    !environment.production ? StoreDevtoolsModule.instrument({maxAge: 10}) : []
   ],
   providers: [StoreService]
 })

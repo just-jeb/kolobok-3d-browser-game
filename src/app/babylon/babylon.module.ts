@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {GameBootstrapperService} from '../bootstrap/game-bootstrapper.service';
+import {RenderEffects} from './render.effects';
 
 export function engineFactory(bootstrapService: GameBootstrapperService) {
   return bootstrapService.engine;
@@ -15,16 +16,6 @@ export function sceneFactory(bootstrapService: GameBootstrapperService) {
     CommonModule
   ],
   providers: [
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: (bootstrapService: GameBootstrapperService) => bootstrapService.engineFactory,
-    //   deps: [GameBootstrapperService]
-    // },
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: (bootstrapService: GameBootstrapperService) => bootstrapService.engineFactory,
-    //   deps: [GameBootstrapperService]
-    // }
     {
       provide: 'DelayedEngine',
       useFactory: engineFactory,
@@ -34,7 +25,8 @@ export function sceneFactory(bootstrapService: GameBootstrapperService) {
       provide: 'DelayedScene',
       useFactory: sceneFactory,
       deps: [GameBootstrapperService]
-    }
+    },
+    RenderEffects
   ]
 })
 export class BabylonModule {

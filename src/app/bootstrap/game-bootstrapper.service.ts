@@ -4,6 +4,7 @@ import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import {AsyncSubject} from 'rxjs/AsyncSubject';
 import 'rxjs/add/operator/map';
+import {StoreService} from '../store/store.service';
 
 @Injectable()
 export class GameBootstrapperService {
@@ -16,13 +17,11 @@ export class GameBootstrapperService {
     return this.engineSubject;
   }
 
-  constructor() {
+  constructor(private store: StoreService) {
     this.scene = this.engineSubject.map(engine => {
       const scene = new Scene(engine);
       this.initScene(scene);
-      engine.runRenderLoop(function () {
-        scene.render();
-      });
+      engine.runRenderLoop(() => this.store.nextFrame());
       return scene;
     });
   }
