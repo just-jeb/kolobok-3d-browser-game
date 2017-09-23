@@ -1,11 +1,12 @@
 import {inject, TestBed} from '@angular/core/testing';
 
 import {GameBootstrapperService} from './game-bootstrapper.service';
+import {BootstrapModule} from './bootstrap.module';
 
 describe('GameBootstrapperService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [GameBootstrapperService]
+      imports: [BootstrapModule]
     });
   });
 

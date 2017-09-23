@@ -2,6 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {GameBootstrapperService} from '../bootstrap/game-bootstrapper.service';
 import {RenderEffects} from './render.effects';
+import {BootstrapModule} from '../bootstrap/bootstrap.module';
+import {EffectsModule} from '@ngrx/effects';
 
 export function engineFactory(bootstrapService: GameBootstrapperService) {
   return bootstrapService.engine;
@@ -13,7 +15,9 @@ export function sceneFactory(bootstrapService: GameBootstrapperService) {
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    BootstrapModule,
+    EffectsModule.forRoot([RenderEffects])
   ],
   providers: [
     {
