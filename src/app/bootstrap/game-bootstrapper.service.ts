@@ -9,7 +9,7 @@ import {StoreService} from '../store/store.service';
 @Injectable()
 export class GameBootstrapperService {
   public scene: Observable<Scene>;
-  private engineSubject: Subject<Engine> = new AsyncSubject();
+  private engineSubject: Subject<Engine> = new AsyncSubject<Engine>();
   // TODO: remove
   private canvas: HTMLCanvasElement;
 
@@ -33,7 +33,7 @@ export class GameBootstrapperService {
   }
 
   // TODO: remove
-  private initScene(scene): Scene {
+  private initScene(scene: Scene): Scene {
     // Change the scene background color to green.
     scene.clearColor = new Color4(0, 1, 0, 0);
 
