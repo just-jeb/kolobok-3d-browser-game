@@ -5,12 +5,14 @@ import {Actions, Effect} from '@ngrx/effects';
 import {doneRendering, RENDER} from '../store/actions/render.actions';
 import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/startWith';
 
 @Injectable()
 export class RenderEffects {
 
-  @Effect() login$ = this.actions$
+  @Effect() render$ = this.actions$
     .ofType(RENDER)
+    .startWith({})
     .combineLatest(this.scene, (_, scene) => {
       scene.render();
       return doneRendering;
@@ -18,8 +20,5 @@ export class RenderEffects {
 
   constructor(@Inject('DelayedScene') private scene: Observable<Scene>,
               private actions$: Actions) {
-    this.scene.subscribe(s => console.log(s));
   }
-
-
 }

@@ -17,7 +17,7 @@ export function sceneFactory(bootstrapService: GameBootstrapperService) {
   imports: [
     CommonModule,
     BootstrapModule,
-    EffectsModule.forRoot([RenderEffects])
+    EffectsModule.forFeature([RenderEffects])
   ],
   providers: [
     {
@@ -29,8 +29,7 @@ export function sceneFactory(bootstrapService: GameBootstrapperService) {
       provide: 'DelayedScene',
       useFactory: sceneFactory,
       deps: [GameBootstrapperService]
-    },
-    RenderEffects
+    }
   ]
 })
 export class BabylonModule {
