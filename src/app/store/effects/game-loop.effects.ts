@@ -14,8 +14,7 @@ import 'rxjs/add/operator/repeat';
 export class GameLoopEffects {
 
   @Effect() updateAndRender$ = Observable
-    .zip(this.actions$.ofType(NEXT_FRAME), this.actions$.ofType(DONE_RENDERING))
-    .take(1)
+    .zip(this.actions$.ofType(NEXT_FRAME).take(1), this.actions$.ofType(DONE_RENDERING).take(1))
     .mergeMapTo(Observable.from([updateWorld, render]))
     .repeat();
 
