@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
-import {GameBootstrapperService} from '../../bootstrap/game-bootstrapper.service';
 import {StoreService} from '../../store/store.service';
+import {BootstrapAction} from '../../store/actions/game-state.actions';
 
 @Component({
   selector: 'kolobok-main-screen',
@@ -10,10 +10,10 @@ import {StoreService} from '../../store/store.service';
 export class MainScreenComponent implements AfterViewInit {
   @ViewChild('canvas') canvas: ElementRef;
 
-  constructor(private gameBootstrapper: GameBootstrapperService, public store: StoreService) {
+  constructor(public store: StoreService) {
   }
 
   ngAfterViewInit(): void {
-    this.gameBootstrapper.bootstrap(this.canvas.nativeElement);
+    this.store.dispatch(new BootstrapAction(this.canvas.nativeElement));
   }
 }

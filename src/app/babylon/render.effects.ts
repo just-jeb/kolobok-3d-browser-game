@@ -6,19 +6,19 @@ import {doneRendering, RENDER} from '../store/actions/render.actions';
 import 'rxjs/add/operator/combineLatest';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/startWith';
+import {DelayedSceneToken} from './injection-tokens';
 
 @Injectable()
 export class RenderEffects {
 
   @Effect() render$ = this.actions$
     .ofType(RENDER)
-    .startWith({})
     .combineLatest(this.scene, (_, scene) => {
       scene.render();
       return doneRendering;
     });
 
-  constructor(@Inject('DelayedScene') private scene: Observable<Scene>,
+  constructor(@Inject(DelayedSceneToken) private scene: Observable<Scene>,
               private actions$: Actions) {
   }
 }

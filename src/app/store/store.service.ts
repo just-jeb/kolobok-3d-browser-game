@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Store} from '@ngrx/store';
+import {Action, Store} from '@ngrx/store';
 import {State} from './state';
 import {keydown} from './actions/input.actions';
 import {nextFrame} from './actions/game-loop.actions';
@@ -16,6 +16,10 @@ export class StoreService {
 
   nextFrame() {
     this.store.dispatch(nextFrame);
+  }
+
+  dispatch(action: Action){
+    this.store.dispatch(action);
   }
 
 }

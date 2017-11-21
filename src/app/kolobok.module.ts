@@ -1,13 +1,13 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {AppComponent} from './kolobok.component';
+import {KolobokRootComponent} from './kolobok.component';
 import {GameModule} from './game/game.module';
 import {BabylonModule} from './babylon/babylon.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    KolobokRootComponent
   ],
   imports: [
     BrowserModule,
@@ -15,6 +15,6 @@ import {BabylonModule} from './babylon/babylon.module';
     BabylonModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [KolobokRootComponent]
 })
 export class AppModule { }
