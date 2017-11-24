@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
+    "build-for-gh-pages": "ng build --prod --base-href \"\/kolobok-3d-browser-game\/\"",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
