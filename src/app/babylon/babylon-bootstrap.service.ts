@@ -3,8 +3,6 @@ import {Engine, Scene} from 'babylonjs';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {AsyncSubject} from 'rxjs/AsyncSubject';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
 
 @Injectable()
 export class BabylonBootstrapService {

@@ -4,16 +4,18 @@ import {finishGroundInitialization, INIT_GAME} from '../store/actions/game-state
 import {Mesh, Scene} from 'babylonjs';
 import {DelayedSceneToken} from './injection-tokens';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/switchMapTo';
+import {mapTo, switchMapTo, tap} from 'rxjs/operators';
 
 
 @Injectable()
 export class GroundEffects {
 
   @Effect()
-  initialize$ = this.actions$.ofType(INIT_GAME).switchMapTo(this.scene.do(
-    scene => Mesh.CreateGround('ground1', 6, 6, 2, scene)
-  ).mapTo(finishGroundInitialization));
+  initialize$ = this.actions$.ofType(INIT_GAME).pipe(
+    switchMapTo(this.scene.pipe(
+      tap(scene => Mesh.CreateGround('ground1', 6, 6, 2, scene)),
+      mapTo(finishGroundInitialization)
+    )));
 
   constructor(private actions$: Actions, @Inject(DelayedSceneToken) private scene: Observable<Scene>) {
   }
