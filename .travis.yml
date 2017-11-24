@@ -25,4 +25,4 @@ deploy:
   github_token: $KOLOBOK_REPO_TOKEN
   local_dir: dist
   on:
-    branch: gh-pages
+    branch: master
