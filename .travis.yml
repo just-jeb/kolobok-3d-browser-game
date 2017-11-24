@@ -18,3 +18,11 @@ script:
   - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
   - xvfb-run -a npm run build
   #- xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js
+  
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $KOLOBOK_REPO_TOKEN
+  local_dir: dist
+  on:
+    branch: gh-pages
