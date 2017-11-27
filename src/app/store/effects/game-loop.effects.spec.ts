@@ -7,7 +7,7 @@ import {cold, hot} from 'jasmine-marbles';
 import {Observable} from 'rxjs/Observable';
 import {updateWorld} from '../actions/update.actions';
 import {zip} from 'rxjs/observable/zip';
-import {take, mergeMapTo, repeat} from 'rxjs/operators';
+import {mergeMapTo, repeat, take} from 'rxjs/operators';
 import {from} from 'rxjs/observable/from';
 
 describe('Game loop effects', () => {
@@ -80,4 +80,5 @@ describe('Game loop effects', () => {
     const expected = cold('--(12)----(12)---(12)');
     expect(observable).toBeObservable(expected);
   });
+
 });
