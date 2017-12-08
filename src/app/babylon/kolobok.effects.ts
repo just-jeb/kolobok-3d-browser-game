@@ -1,12 +1,13 @@
 import {Inject, Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
-import {finishKolobokInitialization, INIT_GAME} from '../store/actions/game-state.actions';
+import {INIT_GAME} from '../store/actions/game-state.actions';
 import {Color3, Mesh, Scene, StandardMaterial, Texture} from 'babylonjs';
 import {DelayedSceneToken} from './injection-tokens';
 import {Observable} from 'rxjs/Observable';
 import {mapTo, switchMapTo, tap} from 'rxjs/operators';
 import {RenderData} from '../rendering/render-data';
 import {kolobokRenderData} from '../rendering/kolobok.render-data';
+import {finishKolobokInitialization} from '../kolobok/actions';
 
 
 @Injectable()

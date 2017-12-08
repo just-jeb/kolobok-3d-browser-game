@@ -1,10 +1,11 @@
 import {Inject, Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
-import {finishLightInitialization, INIT_GAME} from '../store/actions/game-state.actions';
+import {INIT_GAME} from '../store/actions/game-state.actions';
 import {HemisphericLight, Scene, Vector3} from 'babylonjs';
 import {DelayedSceneToken} from './injection-tokens';
 import {Observable} from 'rxjs/Observable';
 import {mapTo, switchMapTo, tap} from 'rxjs/operators';
+import {finishLightInitialization} from '../light/actions';
 
 
 @Injectable()

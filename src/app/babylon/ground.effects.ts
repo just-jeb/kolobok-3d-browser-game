@@ -1,10 +1,11 @@
 import {Inject, Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
-import {finishGroundInitialization, INIT_GAME} from '../store/actions/game-state.actions';
+import {INIT_GAME} from '../store/actions/game-state.actions';
 import {Mesh, Scene} from 'babylonjs';
 import {DelayedSceneToken} from './injection-tokens';
 import {Observable} from 'rxjs/Observable';
 import {mapTo, switchMapTo, tap} from 'rxjs/operators';
+import {finishGroundInitialization} from '../ground/actions';
 
 
 @Injectable()

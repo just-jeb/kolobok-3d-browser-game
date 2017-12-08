@@ -1,10 +1,11 @@
 import {Inject, Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
-import {BootstrapAction, finishCameraInitialization, INIT_GAME} from '../store/actions/game-state.actions';
+import {BootstrapAction, INIT_GAME} from '../store/actions/game-state.actions';
 import {FreeCamera, Scene, Vector3} from 'babylonjs';
 import {DelayedSceneToken} from './injection-tokens';
 import {Observable} from 'rxjs/Observable';
 import {mapTo, switchMapTo, tap} from 'rxjs/operators';
+import {finishCameraInitialization} from '../camera/actions';
 
 
 @Injectable()

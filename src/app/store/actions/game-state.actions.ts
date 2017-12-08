@@ -22,15 +22,3 @@ export class BootstrapAction implements Action {
 
 export const FINISH_GAME_BOOTSTRAP = 'FINISH_GAME_BOOTSTRAP';
 export const finishGameBootstrap = createSimpleAction(FINISH_GAME_BOOTSTRAP);
-
-export const FINISH_KOLOBOK_INITIALIZATION = 'FINISH_KOLOBOK_INITIALIZATION';
-export const finishKolobokInitialization = createSimpleAction(FINISH_KOLOBOK_INITIALIZATION);
-
-export const FINISH_GROUND_INITIALIZATION = 'FINISH_GROUND_INITIALIZATION';
-export const finishGroundInitialization = createSimpleAction(FINISH_GROUND_INITIALIZATION);
-
-export const FINISH_LIGHT_INITIALIZATION = 'FINISH_LIGHT_INITIALIZATION';
-export const finishLightInitialization = createSimpleAction(FINISH_LIGHT_INITIALIZATION);
-
-export const FINISH_CAMERA_INITIALIZATION = 'FINISH_CAMERA_INITIALIZATION';
-export const finishCameraInitialization = createSimpleAction(FINISH_CAMERA_INITIALIZATION);
