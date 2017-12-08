@@ -1,4 +1,4 @@
-import {Vector3} from '../../common/vector3';
+import {Vector3} from '../common/vector3';
 
 export interface Kolobok {
   position: Vector3;

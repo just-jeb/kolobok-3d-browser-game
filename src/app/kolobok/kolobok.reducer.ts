@@ -1,4 +1,4 @@
-import {Kolobok} from '../state/kolobok';
+import {Kolobok} from './kolobok';
 import {Action} from '@ngrx/store';
 
 const initialKolobokState: Kolobok = {
