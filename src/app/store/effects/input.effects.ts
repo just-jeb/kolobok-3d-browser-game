@@ -7,7 +7,6 @@ import {map} from 'rxjs/operators';
 export class InputEffects {
 
   @Effect() login$ = this.actions$
-  // Listen for the 'LOGIN' action
     .ofType(KEY_DOWN).pipe(map((keyDownAction: KeyboardEventAction) => console.log(keyDownAction)));
 
   constructor(
