@@ -8,18 +8,22 @@ import {mapTo, switchMapTo, tap} from 'rxjs/operators';
 import {RenderData} from '../rendering/render-data';
 import {kolobokRenderData} from '../kolobok/kolobok.render-data';
 import {finishKolobokInitialization} from '../kolobok/actions';
+import {combineLatest} from 'rxjs/observable/combineLatest';
+import {StoreService} from '../store/store.service';
+import {skyboxSelector} from '../skybox/skybox.selector';
 
 
 @Injectable()
-export class KolobokEffects {
+export class SkyboxEffects {
 
   @Effect()
   initialize$ = this.actions$.ofType(INIT_GAME).pipe(
+    combineLatest(store.select(skyboxSelector)),
     switchMapTo(this.scene.pipe(
       tap(
         scene => {
           // Let's try our built-in 'sphere' shape. Params: name, subdivisions, size, scene
-          const sphere = Mesh.CreateSphere('sphere1', 16, 2, scene);
+          const box = Mesh.CreateBox("skyBox", _size, sceneManager.Scene);
 
           // Move the sphere upward 1/2 its height
           sphere.position.y = 1;
@@ -58,6 +62,6 @@ export class KolobokEffects {
     mesh.material = material;
   }
 
-  constructor(private actions$: Actions, @Inject(DelayedSceneToken) private scene: Observable<Scene>) {
+  constructor(private actions$: Actions, @Inject(DelayedSceneToken) private scene: Observable<Scene>, private store: StoreService) {
   }
 }
