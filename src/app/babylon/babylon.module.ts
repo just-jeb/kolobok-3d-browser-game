@@ -10,6 +10,7 @@ import {KolobokEffects} from './kolobok.effects';
 import {GroundEffects} from './ground.effects';
 import {CameraEffects} from './camera.effects';
 import {LightEffects} from './light.effects';
+import {SkyboxEffects} from './skybox.effects';
 
 export function engineFactory(bootstrapService: BabylonBootstrapService) {
   return bootstrapService.engine;
@@ -24,7 +25,7 @@ export function sceneFactory(bootstrapService: BabylonBootstrapService) {
     CommonModule,
     EffectsModule.forFeature([
       RenderEffects, BootstrapEffects, BabylonGameStateEffects,
-      GroundEffects, KolobokEffects, CameraEffects, LightEffects
+      GroundEffects, KolobokEffects, CameraEffects, LightEffects, SkyboxEffects
     ])
   ],
   providers: [

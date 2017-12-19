@@ -1,50 +1,49 @@
 import {Inject, Injectable} from '@angular/core';
 import {Actions, Effect} from '@ngrx/effects';
 import {INIT_GAME} from '../store/actions/game-state.actions';
-import {Color3, Mesh, Scene, StandardMaterial, Texture} from 'babylonjs';
+import {Color3, CubeTexture, Mesh, Scene, StandardMaterial, Texture, Vector3} from 'babylonjs';
 import {DelayedSceneToken} from './injection-tokens';
 import {Observable} from 'rxjs/Observable';
-import {mapTo, switchMapTo, tap} from 'rxjs/operators';
+import {combineLatest, mapTo, switchMapTo, take} from 'rxjs/operators';
 import {RenderData} from '../rendering/render-data';
-import {kolobokRenderData} from '../kolobok/kolobok.render-data';
-import {finishKolobokInitialization} from '../kolobok/actions';
-import {combineLatest} from 'rxjs/observable/combineLatest';
-import {StoreService} from '../store/store.service';
+import {Store} from '@ngrx/store';
 import {skyboxSelector} from '../skybox/skybox.selector';
-
+import {skyboxRenderData} from '../skybox/skybox.render-data';
+import {finishSkyboxInitialization} from '../skybox/actions';
 
 @Injectable()
 export class SkyboxEffects {
+  private skybox = this.store.select(skyboxSelector);
 
   @Effect()
   initialize$ = this.actions$.ofType(INIT_GAME).pipe(
-    combineLatest(store.select(skyboxSelector)),
     switchMapTo(this.scene.pipe(
-      tap(
-        scene => {
-          // Let's try our built-in 'sphere' shape. Params: name, subdivisions, size, scene
-          const box = Mesh.CreateBox("skyBox", _size, sceneManager.Scene);
+      combineLatest(this.skybox.pipe(take(1)), (scene, skybox) => {
+        // Let's try our built-in 'sphere' shape. Params: name, subdivisions, size, scene
+        const box = Mesh.CreateBox('skyBox', skybox.size, scene);
 
-          // Move the sphere upward 1/2 its height
-          sphere.position.y = 1;
+        box.position = new Vector3(skybox.position.x, skybox.position.y, skybox.position.z);
 
-          // TODO: move render initialization to separate class
-          this.render(scene, sphere, kolobokRenderData);
-
-        }
-      ),
-      mapTo(finishKolobokInitialization)
+        // TODO: move render initialization to separate class
+        this.render(scene, box, skyboxRenderData);
+      }),
+      mapTo(finishSkyboxInitialization)
     )));
 
   // TODO: refactor
   private render(scene: Scene, mesh: Mesh, data: RenderData) {
-    const material = new StandardMaterial('kolobokMaterial', scene);
+    const material = new StandardMaterial('skyboxMaterial', scene);
+
+    material.backFaceCulling = false;
 
     if (data.diffuseTexture) {
       material.diffuseTexture = new Texture(data.diffuseTexture, scene);
     }
-    // this.material.bumpTexture = AssetsManager.textures["kolobokBumpTexture"];
+    if (data.reflectionTexture) {
+      material.reflectionTexture = new CubeTexture(data.reflectionTexture, scene);
+    }
 
+    material.reflectionTexture.coordinatesMode = Texture.SKYBOX_MODE;
     if (data.ambientColor) {
       material.ambientColor = new Color3(data.ambientColor.r, data.ambientColor.g, data.ambientColor.b);
     }
@@ -55,13 +54,17 @@ export class SkyboxEffects {
       material.emissiveColor = new Color3(data.emissiveColor.r, data.emissiveColor.g, data.emissiveColor.b);
     }
     if (data.specular) {
-      material.specularColor = new Color3(data.specular.color.r, data.specular.color.g, data.specular.color.b);
-      material.specularPower = data.specular.power;
+      if (data.specular.color) {
+        material.specularColor = new Color3(data.specular.color.r, data.specular.color.g, data.specular.color.b);
+      }
+      if (data.specular.power) {
+        material.specularPower = data.specular.power;
+      }
     }
 
     mesh.material = material;
   }
 
-  constructor(private actions$: Actions, @Inject(DelayedSceneToken) private scene: Observable<Scene>, private store: StoreService) {
+  constructor(private actions$: Actions, @Inject(DelayedSceneToken) private scene: Observable<Scene>, private store: Store<any>) {
   }
 }

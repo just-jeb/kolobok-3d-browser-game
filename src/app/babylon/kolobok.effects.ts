@@ -40,7 +40,9 @@ export class KolobokEffects {
       material.diffuseTexture = new Texture(data.diffuseTexture, scene);
     }
     // this.material.bumpTexture = AssetsManager.textures["kolobokBumpTexture"];
-
+    if (data.reflectionTexture) {
+      material.reflectionTexture = new Texture(data.reflectionTexture, scene);
+    }
     if (data.ambientColor) {
       material.ambientColor = new Color3(data.ambientColor.r, data.ambientColor.g, data.ambientColor.b);
     }
@@ -51,8 +53,12 @@ export class KolobokEffects {
       material.emissiveColor = new Color3(data.emissiveColor.r, data.emissiveColor.g, data.emissiveColor.b);
     }
     if (data.specular) {
-      material.specularColor = new Color3(data.specular.color.r, data.specular.color.g, data.specular.color.b);
-      material.specularPower = data.specular.power;
+      if (data.specular.color) {
+        material.specularColor = new Color3(data.specular.color.r, data.specular.color.g, data.specular.color.b);
+      }
+      if (data.specular.power) {
+        material.specularPower = data.specular.power;
+      }
     }
 
     mesh.material = material;
