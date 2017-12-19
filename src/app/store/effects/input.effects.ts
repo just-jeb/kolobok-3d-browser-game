@@ -6,12 +6,9 @@ import {map} from 'rxjs/operators';
 @Injectable()
 export class InputEffects {
 
-  @Effect() login$ = this.actions$
+  @Effect({dispatch: false}) keydown$ = this.actions$
     .ofType(KEY_DOWN).pipe(map((keyDownAction: KeyboardEventAction) => console.log(keyDownAction)));
 
-  constructor(
-              private actions$: Actions) {
+  constructor(private actions$: Actions) {
   }
-
-
 }
