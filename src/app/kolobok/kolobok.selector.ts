@@ -7,4 +7,5 @@ export interface KolobokState {
 
 export const KOLOBOK_FEATURE = 'kolobok';
 export const kolobokFeatureSelector = createFeatureSelector(KOLOBOK_FEATURE);
-export const kolobokSelector = createSelector(kolobokFeatureSelector, (state: KolobokState) => state.kolobok);
+// TODO: handle undefined case
+export const kolobokSelector = createSelector(kolobokFeatureSelector, (state: KolobokState) => state ? state.kolobok : state);

@@ -13,6 +13,12 @@ import {Skybox} from '../skybox/skybox';
 
 @Injectable()
 export class SkyboxEffects extends BabylonEntity<Skybox> {
+  protected update(mesh: Mesh, skybox: Skybox): void {
+    mesh.rotation.x = skybox.rotation.x;
+    mesh.rotation.y = skybox.rotation.y;
+    mesh.rotation.z = skybox.rotation.z;
+  }
+
   protected setUpMaterial(material: StandardMaterial, scene: Scene, renderData: RenderData): void {
     if (renderData.reflectionTexture) {
       material.reflectionTexture = new CubeTexture(renderData.reflectionTexture, scene);

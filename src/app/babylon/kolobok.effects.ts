@@ -14,6 +14,8 @@ import {kolobokSelector} from '../kolobok/kolobok.selector';
 
 @Injectable()
 export class KolobokEffects extends BabylonEntity<Kolobok> {
+  protected update(mesh: Mesh, entity: Kolobok): void {
+  }
   protected setUpMaterial(material: StandardMaterial, scene: Scene, renderData: RenderData): void {
     if (renderData.reflectionTexture) {
       material.reflectionTexture = new Texture(renderData.reflectionTexture, scene);

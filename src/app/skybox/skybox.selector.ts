@@ -7,4 +7,5 @@ export interface SkyboxState {
 
 export const SKYBOX_FEATURE = 'skybox';
 export const skyboxFeatureSelector = createFeatureSelector(SKYBOX_FEATURE);
-export const skyboxSelector = createSelector(skyboxFeatureSelector, (state: SkyboxState) => state.skybox);
+// TODO: handle undefined case
+export const skyboxSelector = createSelector(skyboxFeatureSelector, (state: SkyboxState) => state ? state.skybox : state);
