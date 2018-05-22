@@ -1,1 +1,1 @@
-# kolobok-3d-browser-game [![Build Status](https://travis-ci.org/meltedspark/kolobok-3d-browser-game.svg?branch=master)](https://travis-ci.org/meltedspark/kolobok-3d-browser-game)
+# kolobok-3d-browser-game [![Build Status](https://travis-ci.org/meltedspark/kolobok-3d-browser-game.svg?branch=master)](https://travis-ci.org/meltedspark/kolobok-3d-browser-game) [![Greenkeeper badge](https://badges.greenkeeper.io/meltedspark/kolobok-3d-browser-game.svg)](https://greenkeeper.io/)
